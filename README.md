@@ -32,7 +32,7 @@ while window.running:
 
 效果为：布料伸缩性非常好
 
-![Yangs](/home/cl/codes/cloth-simulation-homework/Yangs-3200.jpg)
+![Yangs-3200](./Yangs-3200.jpg)
 
 
 
