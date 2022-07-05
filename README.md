@@ -1,14 +1,10 @@
-1. To use this repo, click the "use this template" green button above.
-2. Install taichi: `pip3 install -r requirements.txt`.
-3. Tweak with the code and add new features to it.
-4. Submit your work in this [issue](https://github.com/taichi-dev/cloth-simulation-homework/issues/1).
-
 
 Example:
 
 <p align="center">
-  <img src="./demo.jpg">
+  <img src="./demo.png">
 </p>
+
 ----
 
 # My work
@@ -74,7 +70,7 @@ while window.running:
 
 ## Medium
 
-**不会被刺穿**：这点官方算例已经完成了
+**不会被刺穿**：暂时不会。
 
 **添加更多球**
 
@@ -148,7 +144,7 @@ offset_to_center显然就是质点对球心的距离
 
 if语句中，假如质点对球心的距离小于球半径（也就是质点在球内部）, 那么就更新速度。
 
-我们的想法是增加一个球。因此只要修改if语句和offset_to_center即可。
+我们的想法是增加一个球。因此只要修改if语句和offset_to_center即可。不破坏原有代码，在这两个语句下面平行地增加代码：
 
 ```
     for i in ti.grouped(x):
@@ -169,9 +165,17 @@ if语句中，假如质点对球心的距离小于球半径（也就是质点在
 
 
 
+![add-ball-sim](./add-ball-sim.png)
+
+这下两个球都可以碰撞了。
 
 
 
+
+
+## Hard
+
+暂时还没做。
 
 
 
