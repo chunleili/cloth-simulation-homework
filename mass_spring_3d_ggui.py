@@ -11,9 +11,12 @@ spring_Y = 3e4
 dashpot_damping = 1e4
 drag_damping = 1
 
-ball_radius = 0.3
+ball_radius = 0.1
 ball_center = ti.Vector.field(3, dtype=float, shape=(1, ))
 ball_center[0] = [0, 0, 0]
+ball_center2 = ti.Vector.field(3, dtype=float, shape=(1, ))
+ball_center2[0] = [0.3, 0, 0]
+
 
 x = ti.Vector.field(3, dtype=float, shape=(n, n))
 v = ti.Vector.field(3, dtype=float, shape=(n, n))
@@ -120,16 +123,23 @@ camera = ti.ui.make_camera()
 current_t = 0.0
 initialize_mass_points()
 
+paused = ti.field(dtype=ti.i32, shape=())
+paused = False
 while window.running:
+    if window.get_event(ti.ui.PRESS):
+        if window.event.key == 's':
+            paused= not paused
+
     if current_t > 1.5:
         # Reset
         initialize_mass_points()
         current_t = 0
 
-    for i in range(substeps):
-        substep()
-        current_t += dt
-    update_vertices()
+    if not paused:
+        for i in range(substeps):
+            substep()
+            current_t += dt
+        update_vertices()
 
     camera.position(0.0, 0.0, 3)
     camera.lookat(0.0, 0.0, 0)
@@ -144,6 +154,7 @@ while window.running:
 
     # Draw a smaller ball to avoid visual penetration
     scene.particles(ball_center, radius=ball_radius * 0.95, color=(0.5, 0.42, 0.8))
+    scene.particles(ball_center2, radius=ball_radius * 0.95, color=(1, 1.0, 0.0))
     canvas.scene(scene)
     window.show()
 
